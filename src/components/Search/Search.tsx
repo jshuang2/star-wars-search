@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { fetchCharacter } from '../../api'
+import SearchResult from '../SearchResult'
 import './style.css'
 
 const Search = () => {
@@ -58,6 +59,12 @@ const Search = () => {
                 </div>
 
             </form>
+
+            {searchResult.name ? 
+                <SearchResult 
+                    searchResult = {searchResult} 
+                /> 
+                : <div></div>}
         </div>
     )
 }

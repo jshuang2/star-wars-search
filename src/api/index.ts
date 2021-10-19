@@ -14,7 +14,7 @@ export async function fetchJson<Response = any>(url: string, init?: RequestInit)
 }
 
 
-export async function fetchCharacter<Response = any>(url: string): Promise<Response> {
+export async function fetchCharacter(url: string){
 
   const response = await 
   fetch(`https://swapi.dev/api/people/?search=${url}`)
