@@ -18,15 +18,22 @@ const Search = () => {
     const [movieTitles, setMovieTitles] = useState<string[]>([])
     const [species, setSpecies] = useState<string[]>([])
 
+
+
     useEffect(() => {
         fetchFilms(searchResult.movies).then(response => {
             setMovieTitles(response)
         })
     }, [searchResult.movies])
 
+
+
+
     useEffect(() => {
         fetchSpecies(searchResult.species).then(response => setSpecies(response))
     }, [searchResult.species])
+
+
 
 
     const onSubmit = (event: any) => {
@@ -51,6 +58,8 @@ const Search = () => {
         )
         })
     }
+
+    
 
     return (
         <div>
