@@ -1,8 +1,12 @@
 import People from '../People';
 
-function App() {
+const App = () => {
+  
   return (
-    <People />
+    <div className="container">
+      <People />
+    </div>
+    
   );
 }
 
