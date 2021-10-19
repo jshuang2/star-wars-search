@@ -14,6 +14,9 @@ export async function fetchJson<Response = any>(url: string, init?: RequestInit)
 }
 
 
+
+
+
 export async function fetchCharacter(url: string){
 
   const response = await 
@@ -30,23 +33,40 @@ export async function fetchCharacter(url: string){
 }
 
 
+
+
 export async function fetchFilms(films: string[]) {
 
   const filmtitlesArray: any = []
 
   for (let film of films) {
     await fetch(`${film}`).then(response => {
-      const res = response.json()
-      return res
+      return response.json()
     })
     .then(data => {
-      console.log(data, "data")
       filmtitlesArray.push(data.title)
     })
   }
 
-  console.log(filmtitlesArray, "myArray")
-
   return filmtitlesArray
 
+}
+
+
+
+
+export async function fetchSpecies(speciesArray: string[]) {
+
+  const speciesResult: string[] = []
+
+  for (let specie of speciesArray) {
+    await fetch(`${specie}`).then(response => {
+      return response.json();
+    })
+    .then(data => {
+      speciesResult.push(data.name)
+    })
+  }
+
+  return speciesResult
 }
