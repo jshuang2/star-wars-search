@@ -6,7 +6,6 @@ import './style.css'
 const Search = () => {
 
     const [text, setText] = useState("")
-
     const [searchResult, setSearchResult] = useState<any>(
         {
             name: "",
@@ -16,6 +15,14 @@ const Search = () => {
             species: []
         }
     )
+    const [movieTitles, setMovieTitles] = useState<string[]>([])
+
+    useEffect(() => {
+        fetchFilms(searchResult.movies).then(response => {
+            setMovieTitles(response)
+        })
+    }, [searchResult.movies])
+
 
     const onSubmit = (event: any) => {
         event.preventDefault()
