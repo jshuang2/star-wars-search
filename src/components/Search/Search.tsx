@@ -16,7 +16,6 @@ const Search = () => {
         }
     )
     const [movieTitles, setMovieTitles] = useState<string[]>([])
-
     const [species, setSpecies] = useState<string[]>([])
 
     useEffect(() => {

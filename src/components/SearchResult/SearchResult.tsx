@@ -1,6 +1,6 @@
 import './style.css'
 
-const SearchResult = ({searchResult, movieTitles}: any) => {
+const SearchResult = ({searchResult, movieTitles, species}: any) => {
     return (
         <div>
             <div className="card">
@@ -9,6 +9,7 @@ const SearchResult = ({searchResult, movieTitles}: any) => {
                     <p className="card-text">Height: {searchResult.height} centimeters</p>
                     <p className="card-text">Birth Year: {searchResult.birthYear}</p>
                     <p>Movies: {movieTitles.join(", ")}</p>
+                    {species.length > 0 ? <p>Species: {species.join(",")}</p> : <p>Species: N/A</p>}
                 </div>
             </div>
         </div>
