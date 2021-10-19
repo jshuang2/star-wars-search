@@ -28,3 +28,25 @@ export async function fetchCharacter(url: string){
   return response.results[0]
 
 }
+
+
+export async function fetchFilms(films: string[]) {
+
+  const filmtitlesArray: any = []
+
+  for (let film of films) {
+    await fetch(`${film}`).then(response => {
+      const res = response.json()
+      return res
+    })
+    .then(data => {
+      console.log(data, "data")
+      filmtitlesArray.push(data.title)
+    })
+  }
+
+  console.log(filmtitlesArray, "myArray")
+
+  return filmtitlesArray
+
+}

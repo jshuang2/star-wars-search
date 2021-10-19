@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { fetchCharacter } from '../../api'
+import { fetchCharacter, fetchFilms } from '../../api'
 import SearchResult from '../SearchResult'
 import './style.css'
 
