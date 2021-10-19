@@ -69,7 +69,8 @@ const Search = () => {
 
             {searchResult.name ? 
                 <SearchResult 
-                    searchResult = {searchResult} 
+                    searchResult = {searchResult}
+                    movieTitles = {movieTitles} 
                 /> 
                 : <div></div>}
         </div>
