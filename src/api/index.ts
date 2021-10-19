@@ -37,7 +37,7 @@ export async function fetchCharacter(url: string){
 
 export async function fetchFilms(films: string[]) {
 
-  const filmtitlesArray: any = []
+  const filmtitlesArray: string[] = []
 
   for (let film of films) {
     await fetch(`${film}`).then(response => {

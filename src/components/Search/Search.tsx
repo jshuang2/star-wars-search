@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { fetchCharacter, fetchFilms } from '../../api'
+import { fetchCharacter, fetchFilms, fetchSpecies } from '../../api'
 import SearchResult from '../SearchResult'
 import './style.css'
 
@@ -17,11 +17,17 @@ const Search = () => {
     )
     const [movieTitles, setMovieTitles] = useState<string[]>([])
 
+    const [species, setSpecies] = useState<string[]>([])
+
     useEffect(() => {
         fetchFilms(searchResult.movies).then(response => {
             setMovieTitles(response)
         })
     }, [searchResult.movies])
+
+    useEffect(() => {
+        fetchSpecies(searchResult.species).then(response => setSpecies(response))
+    }, [searchResult.species])
 
 
     const onSubmit = (event: any) => {
@@ -70,7 +76,8 @@ const Search = () => {
             {searchResult.name ? 
                 <SearchResult 
                     searchResult = {searchResult}
-                    movieTitles = {movieTitles} 
+                    movieTitles = {movieTitles}
+                    species = {species} 
                 /> 
                 : <div></div>}
         </div>
