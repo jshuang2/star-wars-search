@@ -1,4 +1,3 @@
-
 //API GET call that returns data on the first page of characters. In order to access the next pages of characters, we need to access the "next" property.
 export async function fetchJson<Response = any>(url: string, init?: RequestInit): Promise<Response> {
   const response = await fetch(

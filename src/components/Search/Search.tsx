@@ -19,31 +19,32 @@ const Search = () => {
         }
     )
     
-    // 
+    // Creating initial state for the return of fetchFilms. Storing the movie titles as an array.
     const [movieTitles, setMovieTitles] = useState<string[]>([])
+
+    // Creating initial state for the return of fetchSpecies. Storing the movie titles as an array.
     const [species, setSpecies] = useState<string[]>([])
 
 
-
+    // Calling fetchFilms whenever searchResult state gets populated with movie endpoints.
     useEffect(() => {
         fetchFilms(searchResult.movies).then(response => {
             setMovieTitles(response)
         })
     }, [searchResult.movies])
 
-
-
-
+    // Calling fetchSpecies whenever searchResult state gets populated with species endpoints.
     useEffect(() => {
         fetchSpecies(searchResult.species).then(response => setSpecies(response))
     }, [searchResult.species])
 
 
 
-
+    // Calling onSubmit when the user clicks on the submit button for a search.
     const onSubmit = (event: any) => {
         event.preventDefault()
 
+        // If there currently is a searchResult, then reset the state.
         if (searchResult.name) {
             setSearchResult(
                 {
@@ -56,7 +57,7 @@ const Search = () => {
             )
         }
         
-
+        // Call fetchCharacter with the user's typed search as the input.
         fetchCharacter(text)
         .then(response => {
 
@@ -64,7 +65,8 @@ const Search = () => {
                 alert("Please pick a valid character")
                 return
             }
-
+        
+        // Populate the searchResult state with the return of fetchCharacter.
         setSearchResult(
             {
                 name: response.name,
@@ -99,6 +101,7 @@ const Search = () => {
 
             </form>
 
+            {/* Adding a ternary that will help solve the issue of movieTitles rendering slower than other data.*/}
             {movieTitles.length > 0 ? 
                 <SearchResult 
                     searchResult = {searchResult}

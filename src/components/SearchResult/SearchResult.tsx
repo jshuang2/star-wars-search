@@ -1,5 +1,6 @@
 import './style.css'
 
+// Takes in props from Search and renders the data in a smaller component here.
 const SearchResult = ({searchResult, movieTitles, species}: any) => {
     return (
         <div>
