@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { fetchCharacter, fetchFilms, fetchSpecies } from '../../api'
+import { SearchPersonType } from '../../types'
 import SearchResult from '../SearchResult'
 import './style.css'
 
@@ -9,7 +10,7 @@ const Search = () => {
     const [text, setText] = useState("")
 
     // Creating initial state for result of the search. It's empty until fetchCharacter is called.
-    const [searchResult, setSearchResult] = useState<any>(
+    const [searchResult, setSearchResult] = useState<SearchPersonType>(
         {
             name: "",
             height: "",
@@ -86,7 +87,6 @@ const Search = () => {
             <form className="form" onSubmit={onSubmit}>
 
                 <div className="mb-3">
-                    
                     <input 
                         type="text"
                         className="form-control" 
