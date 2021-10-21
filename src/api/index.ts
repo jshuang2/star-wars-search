@@ -1,3 +1,5 @@
+
+//API GET call that returns data on the first page of characters. In order to access the next pages of characters, we need to access the "next" property.
 export async function fetchJson<Response = any>(url: string, init?: RequestInit): Promise<Response> {
   const response = await fetch(
     `https://swapi.dev/api/${url}/`,
@@ -16,11 +18,17 @@ export async function fetchJson<Response = any>(url: string, init?: RequestInit)
 
 
 
-
-export async function fetchCharacter(url: string){
+// API GET call that takes in a character's name and returns data on that character.
+export async function fetchCharacter(url: string, init?: RequestInit){
 
   const response = await 
-  fetch(`https://swapi.dev/api/people/?search=${url}`)
+  fetch(`https://swapi.dev/api/people/?search=${url}`, {
+    ...init ?? {},
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
   .then (response => {
     return response.json();
   })
@@ -34,7 +42,7 @@ export async function fetchCharacter(url: string){
 
 
 
-
+// API GET call that takes in an array of film endpoints and returns the titles of each film in a new array.
 export async function fetchFilms(films: string[]) {
 
   const filmtitlesArray: string[] = []
@@ -54,7 +62,7 @@ export async function fetchFilms(films: string[]) {
 
 
 
-
+// API GET call that takes in an array of species endpoints and returns the name of each species in a new array.
 export async function fetchSpecies(speciesArray: string[]) {
 
   const speciesResult: string[] = []

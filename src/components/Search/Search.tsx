@@ -5,7 +5,10 @@ import './style.css'
 
 const Search = () => {
 
+    // Creating initial state for inputted text in the search bar
     const [text, setText] = useState("")
+
+    // Creating initial state for result of the search. It's empty until fetchCharacter is called.
     const [searchResult, setSearchResult] = useState<any>(
         {
             name: "",
@@ -15,6 +18,8 @@ const Search = () => {
             species: []
         }
     )
+    
+    // 
     const [movieTitles, setMovieTitles] = useState<string[]>([])
     const [species, setSpecies] = useState<string[]>([])
 
@@ -38,6 +43,19 @@ const Search = () => {
 
     const onSubmit = (event: any) => {
         event.preventDefault()
+
+        if (searchResult.name) {
+            setSearchResult(
+                {
+                    name: "",
+                    height: "",
+                    birthYear: "",
+                    movies: [],
+                    species: []
+                }
+            )
+        }
+        
 
         fetchCharacter(text)
         .then(response => {
@@ -81,7 +99,7 @@ const Search = () => {
 
             </form>
 
-            {searchResult.name ? 
+            {movieTitles.length > 0 ? 
                 <SearchResult 
                     searchResult = {searchResult}
                     movieTitles = {movieTitles}
