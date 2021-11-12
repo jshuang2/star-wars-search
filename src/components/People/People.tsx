@@ -22,7 +22,7 @@ function People() {
   // Mapping through the array of stored character names in state and rendering them to the page.
   return (
     <div>
-      <h4 className="listHeader">Example Characters</h4>
+      <h4 className="listHeader">Characters</h4>
       <div className="peopleContainer">{people.map(person => <Person key={person.name} person={person} />)}</div>
     </div>
   )
