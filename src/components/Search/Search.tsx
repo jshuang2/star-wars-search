@@ -7,7 +7,7 @@ import './style.css'
 const Search = () => {
 
     // Creating initial state for inputted text in the search bar
-    const [text, setText] = useState("")
+    const [text, setText] = useState<string>("")
 
     // Creating initial state for result of the search. It's empty until fetchCharacter is called.
     const [searchResult, setSearchResult] = useState<SearchPersonType>(
@@ -29,9 +29,7 @@ const Search = () => {
 
     // Calling fetchFilms whenever searchResult state gets populated with movie endpoints.
     useEffect(() => {
-        fetchFilms(searchResult.movies).then(response => {
-            setMovieTitles(response)
-        })
+        fetchFilms(searchResult.movies).then(response => setMovieTitles(response))
     }, [searchResult.movies])
 
     // Calling fetchSpecies whenever searchResult state gets populated with species endpoints.

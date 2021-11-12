@@ -1,8 +1,21 @@
-//API GET call that returns data on the first page of characters. In order to access the next pages of characters, we need to access the "next" property.
-export async function fetchJson<Response = any>(url: string, init?: RequestInit): Promise<Response> {
-  const response = await fetch(
-    `https://swapi.dev/api/${url}/`,
-    {
+//API GET call that returns data on all characters from each page of characters. In order to access the next pages of characters, we needed to access the "next" property. I brute forced a solution and manually created an array with 9 pages because I know that there are only 9 pages of characters.
+
+const pageURLs = [
+  "https://swapi.dev/api/people/?page=1", 
+  "https://swapi.dev/api/people/?page=2", 
+  "https://swapi.dev/api/people/?page=3", 
+  "https://swapi.dev/api/people/?page=4", 
+  "https://swapi.dev/api/people/?page=5", 
+  "https://swapi.dev/api/people/?page=6", 
+  "https://swapi.dev/api/people/?page=7", 
+  "https://swapi.dev/api/people/?page=8", 
+  "https://swapi.dev/api/people/?page=9"
+]
+
+export async function fetchJson(url: string, init?: RequestInit) {
+
+  const pages = await Promise.all(pageURLs.map(async person => {
+    const response = await fetch(`${person}`, {
       ...init ?? {},
       headers: {
         Accept: 'application/json',
@@ -10,8 +23,22 @@ export async function fetchJson<Response = any>(url: string, init?: RequestInit)
       }
     })
 
+  const res = await response.json()
 
-  return response.json()
+  return res.results;
+  }))
+
+  let characters = []
+
+  // Because the data is an array of pages with each page holding an array of characters, I looped through each page and pushed each character's data into a new array. This new array is what I eventually return and manipulate to render a character's name onto the page.
+  
+  for(let page of pages) {
+    for(let character of page) {
+      characters.push(character)
+    }
+  }
+
+  return characters
 }
 
 
@@ -44,24 +71,42 @@ export async function fetchCharacter<Response = any>(url: string, init?: Request
 // API GET call that takes in an array of film endpoints and returns the titles of each film in a new array.
 export async function fetchFilms(films: string[], init?: RequestInit) {
 
-  const filmtitlesArray: string[] = []
 
-  for (let film of films) {
-    await fetch(`${film}`, {
-      ...init ?? {},
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    }).then(response => {
-        return response.json()
-    })
-      .then(data => {
-        filmtitlesArray.push(data.title)
-    })
-  }
+  const filmReponses = await Promise.all(films.map(async film => {
+    const response = await fetch(`${film}`, {
+          ...init ?? {},
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          }
+        })
 
-  return filmtitlesArray
+    const res = await response.json()
+
+    return res.title
+    
+  }))
+
+  return filmReponses;
+
+  // const filmtitlesArray: string[] = []
+
+  // for (let film of films) {
+  //   await fetch(`${film}`, {
+  //     ...init ?? {},
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }
+  //   }).then(response => {
+  //       return response.json()
+  //   })
+  //     .then(data => {
+  //       filmtitlesArray.push(data.title)
+  //   })
+  // }
+
+  // return filmtitlesArray
 
 }
 
