@@ -9,20 +9,11 @@ function People() {
   // Setting state that will hold names of characters from fetchJson and store them in an array
   const [people, setPeople] = useState<PersonType[]>([])
 
-  const pageURLs = [
-    "https://swapi.dev/api/people/?page=1", 
-    "https://swapi.dev/api/people/?page=2", 
-    "https://swapi.dev/api/people/?page=3", 
-    "https://swapi.dev/api/people/?page=4", 
-    "https://swapi.dev/api/people/?page=5", 
-    "https://swapi.dev/api/people/?page=6", 
-    "https://swapi.dev/api/people/?page=7", 
-    "https://swapi.dev/api/people/?page=8", 
-    "https://swapi.dev/api/people/?page=9"
-  ]
+  const pageNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
   // Calling useEffect as soon as the component mounts and calling fetchJson to fetch the names of the first page of characters.
   useEffect(() => {
-    fetchJson(pageURLs)
+    fetchJson(pageNumbers)
       .then(peopleResponse => {
         setPeople(peopleResponse)
       })
