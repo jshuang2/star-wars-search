@@ -23,7 +23,7 @@ function People() {
   return (
     <div>
       <h4 className="listHeader">Example Characters</h4>
-      {people.map(person => <Person key={person.name} person={person} />)}
+      <div className="peopleContainer">{people.map(person => <Person key={person.name} person={person} />)}</div>
     </div>
   )
 }
