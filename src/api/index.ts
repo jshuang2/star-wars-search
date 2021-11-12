@@ -1,18 +1,8 @@
 //API GET call that returns data on all characters from each page of characters. In order to access the next pages of characters, we needed to access the "next" property. I brute forced a solution and manually created an array with 9 pages because I know that there are only 9 pages of characters.
 
-const pageURLs = [
-  "https://swapi.dev/api/people/?page=1", 
-  "https://swapi.dev/api/people/?page=2", 
-  "https://swapi.dev/api/people/?page=3", 
-  "https://swapi.dev/api/people/?page=4", 
-  "https://swapi.dev/api/people/?page=5", 
-  "https://swapi.dev/api/people/?page=6", 
-  "https://swapi.dev/api/people/?page=7", 
-  "https://swapi.dev/api/people/?page=8", 
-  "https://swapi.dev/api/people/?page=9"
-]
 
-export async function fetchJson(url: string, init?: RequestInit) {
+
+export async function fetchJson(pageURLs: string[], init?: RequestInit) {
 
   const pages = await Promise.all(pageURLs.map(async person => {
     const response = await fetch(`${person}`, {
